@@ -1,0 +1,76 @@
+                    PRIVATE AFFERO GENERAL PUBLIC LICENSE
+                          Version 1, 29 April 2024
+
+Copyright (C) 2024 OneHospital
+
+Everyone is permitted to copy and distribute verbatim copies of this license document,
+but changing it is not allowed.
+
+Preamble:
+
+The Private Affero General Public License is designed to ensure that users who interact
+with the software over a network have access to the source code and to ensure that
+modifications to the software are disclosed. This License is based on the 
+Affero General Public License (AGPL) and adapted for OneHospital
+
+TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION:
+
+0. Definitions.
+
+"Software" refers to the program distributed under this license.
+"Modification" refers to any alteration of the Software, including but not limited to additions, deletions, or changes in the software’s functionality.
+"Contributions" refer to any changes, enhancements, or improvements made to the Software by any party.
+
+1. Source Code Availability.
+
+   Users are granted the right to access and modify the source code of the Software.
+   Any distribution, including over a network, must include access to the source code.
+
+   Deployment in production environments is only allowed from the official git repository
+   maintained by OneHospital. Users are prohibited from deploying the Software in production
+   environments from unofficial git repositories or sources.
+
+   Upon request, users may seek permission to deploy the Software from a custom repository.
+   However, such deployment must go through our code review process to ensure compliance
+   with security standards and best practices.
+
+2. Resale Prohibition.
+
+   No one is permitted to sell or sublicense the Software or any Derivative Works.
+
+3. Notification of Changes.
+
+   Any Modifications made to the Software must be clearly documented and made available to users.
+
+4. Distribution.
+
+   Redistribution of the Software or any Modifications must be done under the terms of this License.
+   Closed source distribution of the Software or any Modifications is strictly prohibited.
+
+5. Acceptance of Terms.
+
+   Use, modification, or distribution of the Software constitutes acceptance of these terms and conditions.
+
+6. License Modification.
+
+   The copyright holder reserves the right to modify or update this License in the future.
+   Any modifications will be effective immediately upon publication.
+
+7. Contributions.
+
+   Contributions to the Software are welcome and encouraged. By making a Contribution, you
+   agree to license your Contribution under the terms of this License.
+
+8. Liability and Warranty.
+
+   The Software is provided "as is", without any warranty or liability for any damages arising from its use.
+
+9. License Compatibility.
+
+    Derivative works may be licensed under terms compatible with this license.
+
+10. Duration.
+
+    This license is perpetual unless terminated due to a breach of its terms.
+
+END OF TERMS AND CONDITIONS
