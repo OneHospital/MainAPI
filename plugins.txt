@@ -1,1 +1,0 @@
-plugins/openerp_example_plugin
