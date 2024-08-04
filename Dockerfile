@@ -12,7 +12,9 @@ COPY . /app/
 
 # Install dependencies
 RUN pip install -r requirements.txt
-RUN pip install -r plugins/plugins.txt
+
+# Check if plugins/plugins.txt exists and install plugins if it does
+RUN if [ -f plugins/plugins.txt ]; then pip install -r plugins/plugins.txt; fi
 
 # Expose the port FastAPI runs on
 EXPOSE 8000
