@@ -1,40 +1,41 @@
-from fastapi import FastAPI, Request, HTTPException
+from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+
+from openerp.api.routes import plugins, root
+from openerp.services.discovery import Doscovery
+from openerp.services.docs_builder import DocsBuilder
+from openerp.services.importer import Importer
+
+# Discover the plugins
+dis = Doscovery()
+# Import the plugins
+imp = Importer(dis.plugins)
+# Build the docs
+bld = DocsBuilder(imp.app_list)
 
 title = "OpenERP Main API"
-description = "This is the main API for OpenERP"
+description = (
+    f"This is the main API for OpenERP\n\n"
+    "#### List of installed plugins are provided below\n\n"
+    f"{bld.docs}"
+)
 author = "@JRudransh"
 version = "0.1.0"
 
-app = FastAPI(title=title, description=description, version=version, author=author)
+
+@asynccontextmanager
+async def lifespan(fastapi_app: FastAPI):
+    # Run startup events
+    for app_dict in imp.app_list:
+        fastapi_app.mount(f"/{app_dict['name']}", app_dict["app"])
+
+    yield
+    # Run shutdown events
 
 
-@app.get("/example/")
-async def read_example(request: Request):
-    if not request.state.has_permission('read', 'res_example'):
-        raise HTTPException(status_code=403, detail="Permission denied")
+app = FastAPI(title=title, description=description, version=version, author=author, lifespan=lifespan)
 
-    return {"message": "This is an example read endpoint", "user": request.state.user_name}
-
-
-@app.post("/example/")
-async def create_example(request: Request):
-    if not request.state.has_permission('create', 'res_example'):
-        raise HTTPException(status_code=403, detail="Permission denied")
-
-    return {"message": "This is an example create endpoint", "user": request.state.user_name}
-
-
-@app.put("/example/")
-async def update_example(request: Request):
-    if not request.state.has_permission('update', 'res_example'):
-        raise HTTPException(status_code=403, detail="Permission denied")
-
-    return {"message": "This is an example update endpoint", "user": request.state.user_name}
-
-
-@app.delete("/example/")
-async def delete_example(request: Request):
-    if not request.state.has_permission('delete', 'res_example'):
-        raise HTTPException(status_code=403, detail="Permission denied")
-
-    return {"message": "This is an example delete endpoint", "user": request.state.user_name}
+# Include api router
+app.include_router(root.router, tags=["Main API"])
+app.include_router(plugins.router, tags=["Plugins API"], prefix="/plugins")

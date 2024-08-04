@@ -1,9 +1,15 @@
 import subprocess
+from os import path
 
 from watchfiles import watch
 
 # Path to the file for which we want to watch
 WATCHED_FILE = "plugins/.plugins"
+
+if not path.exists(WATCHED_FILE):
+    print(f"File {WATCHED_FILE} does not exist. Creating it...")
+    with open(WATCHED_FILE, "w") as f:
+        f.write("")
 
 
 def rebuild_and_restart():

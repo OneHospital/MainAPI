@@ -8,10 +8,9 @@ The plugin must follow some conventions
 2. Plugin name should be prefixed with `openerp_` and suffixed with `_plugin`
 3. In the top level of the package, we should be able to import
     - Variables `title`, `description`, `author`, `version`
-    - FastAPI app `app` which can be mounted in the main app
+    - FastAPI app `api_router` which can be mounted in the main app
     - The List of `available_resources`. It will be used by main application for permissions. e.g. `["res_1", "res_2"]`
-    - List of requested scopes `data_scopes`. It will determine what data will be available for plugin
-    - List of pip requirements `requirements` other than the `requirements.txt` of BaseAPI
+    - List of requested scopes `data_scopes`. It will determine what data will be available for the plugin
 
 ## Advanced conventions
 

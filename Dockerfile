@@ -11,8 +11,8 @@ WORKDIR /app
 COPY . /app/
 
 # Install dependencies
-RUN pip install --upgrade -r requirements.txt
-RUN pip install --upgrade -r plugins.txt
+RUN pip install -r requirements.txt
+RUN pip install -r plugins/plugins.txt
 
 # Expose the port FastAPI runs on
 EXPOSE 8000
