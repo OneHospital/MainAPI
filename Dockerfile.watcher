@@ -1,0 +1,16 @@
+FROM docker:20.10-dind
+
+# Install Python
+RUN apk add --no-cache python3 py3-pip
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the local watcher.py file into the container
+COPY watcher.py /app
+
+# Install the watchfiles package
+RUN pip3 install watchfiles==0.22.0
+
+# Run watcher.py when the container launches
+CMD ["python3", "watcher.py"]

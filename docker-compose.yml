@@ -9,3 +9,11 @@ services:
       - .:/app
     ports:
       - "8000:8000"
+
+  watcher:
+    build:
+      context: .
+      dockerfile: Dockerfile.watcher
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./plugins:/app/plugins

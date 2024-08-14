@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf -**-
+# watcher.py
 import subprocess
 from os import path
 
@@ -16,8 +19,7 @@ def rebuild_and_restart():
     print("Change detected. Rebuilding and restarting Docker Compose services...")
     try:
         subprocess.run(["docker", "compose", "build"], check=True)
-        subprocess.run(["docker", "compose", "down"], check=True)
-        subprocess.run(["docker", "compose", "up", "-d"], check=True)
+        subprocess.run(["docker", "compose", "restart"], check=True)
         print("Docker Compose services restarted successfully.")
     except subprocess.CalledProcessError as e:
         print(f"Error occurred: {e}")
