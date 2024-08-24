@@ -15,6 +15,17 @@ async def read_plugins():
     return plugins
 
 
+@router.get("/installed/")
+async def check_installed_plugins():
+    """
+    List all the installed plugins
+    """
+    plugins = Plugin()
+    installed = plugins.check_installed()
+
+    return installed
+
+
 @router.get("/{plugin_id}/install/")
 async def install_plugin(plugin_id: str, reboot: bool = False):
     """

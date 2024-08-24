@@ -5,7 +5,10 @@ from openerp.config import Config
 
 class Plugin:
 
-    def __init__(self, name_list: list[str]):
+    def __init__(self, name_list: list[str] = None):
+        if not name_list:
+            name_list = []
+
         self.name_list = name_list
 
     def update_installed(self):
@@ -15,6 +18,11 @@ class Plugin:
             my_plugin = f'plugins/{name}'
             plugins.append(my_plugin)
         self._write_file(plugins, filename)
+
+    def check_installed(self) -> list[str]:
+        filename = '.plugins'
+        plugins = self._read_file(filename)
+        return plugins
 
     def trigger_reboot(self):
         plugins = self._read_file()

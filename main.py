@@ -1,8 +1,9 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from loguru import logger
 
-from openerp.api.routes import plugins, root
+from openerp.api.routes import auth, plugins, root
 from openerp.services.discovery import Doscovery
 from openerp.services.docs_builder import DocsBuilder
 from openerp.services.importer import Importer
@@ -30,6 +31,8 @@ async def lifespan(fastapi_app: FastAPI):
     for app_dict in imp.app_list:
         fastapi_app.mount(f"/{app_dict['name']}", app_dict["app"])
 
+    logger.debug("Application startup completed successfully")
+
     yield
     # Run shutdown events
 
@@ -39,3 +42,4 @@ app = FastAPI(title=title, description=description, version=version, author=auth
 # Include api router
 app.include_router(root.router, tags=["Main API"])
 app.include_router(plugins.router, tags=["Plugins API"], prefix="/plugins")
+app.include_router(auth.router, tags=["Auth API"], prefix="/auth")
